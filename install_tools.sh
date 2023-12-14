@@ -34,7 +34,7 @@ cd ..
 gcloud components install beta --quiet
 
 gcloud --version
-
+rm google-cloud-sdk-291.0.0-linux-x86_64.tar.gz
 
 #adding java
 wget https://download.java.net/openjdk/jdk8u43/ri/openjdk-8u43-linux-x64.tar.gz
@@ -42,35 +42,37 @@ tar xzvf openjdk-8u43-linux-x64.tar.gz
 mv java-se-8u43-ri /opt/harness-delegate/repos_upgrade/java_repo/
 update-alternatives --install /usr/bin/java java /opt/harness-delegate/repos_upgrade/java_repo/java-se-8u43-ri/bin/java 1
 update-alternatives --install /usr/bin/javac javac /opt/harness-delegate/repos_upgrade/java_repo/java-se-8u43-ri/bin/javac 1
+rm openjdk-8u43-linux-x64.tar.gz
 
 wget https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz
 tar xzvf openjdk-10.0.2_linux-x64_bin.tar.gz
 mv jdk-10.0.2 /opt/harness-delegate/repos_upgrade/java_repo/
 update-alternatives --install /usr/bin/java java /opt/harness-delegate/repos_upgrade/java_repo/jdk-10.0.2/bin/java 2
 update-alternatives --install /usr/bin/javac javac /opt/harness-delegate/repos_upgrade/java_repo/jdk-10.0.2/bin/javac 2
-
+rm openjdk-10.0.2_linux-x64_bin.tar.gz
 
 wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
 tar xzvf openjdk-11.0.2_linux-x64_bin.tar.gz
 mv jdk-11.0.2 /opt/harness-delegate/repos_upgrade/java_repo/
 update-alternatives --install /usr/bin/java java /opt/harness-delegate/repos_upgrade/java_repo/jdk-11.0.2/bin/java 3
 update-alternatives --install /usr/bin/javac javac /opt/harness-delegate/repos_upgrade/java_repo/jdk-11.0.2/bin/javac 3
-
+rm openjdk-11.0.2_linux-x64_bin.tar.gz
 
 wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
 tar xzvf openjdk-17.0.2_linux-x64_bin.tar.gz
 mv jdk-17.0.2 /opt/harness-delegate/repos_upgrade/java_repo/
 update-alternatives --install /usr/bin/java java /opt/harness-delegate/repos_upgrade/java_repo/jdk-17.0.2/bin/java 4
 update-alternatives --install /usr/bin/javac javac /opt/harness-delegate/repos_upgrade/java_repo/jdk-17.0.2/bin/javac 4
-
+rm openjdk-17.0.2_linux-x64_bin.tar.gz
 
 #adding maven
 wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip
 unzip apache-maven-3.9.4-bin.zip -d /opt/harness-delegate/repos_upgrade/maven_repo
-
+rm apache-maven-3.9.4-bin.zip
 
 wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
 unzip apache-maven-3.6.3-bin.zip -d /opt/harness-delegate/repos_upgrade/maven_repo
+rm apache-maven-3.6.3-bin.zip
 
 #install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
@@ -113,6 +115,7 @@ export GRADLE_HOME=/opt/gradle-4.10.2
 export PATH=/opt/gradle-4.10.2/bin:${PATH}
 #EOF
 #chmod +x /opt/gradle-path.sh
+rm gradle-4.10.2-bin.zip
 
 
 #install pip
