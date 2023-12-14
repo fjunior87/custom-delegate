@@ -1,4 +1,4 @@
-FROM harness/delegate:23.11.81601
+FROM harness/delegate:23.12.81604
 COPY install_tools.sh .
 #RUN ls -ltr
 USER root
