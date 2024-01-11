@@ -1,5 +1,5 @@
 echo "installing tools"
-microdnf update
+microdnf update 
 
 mkdir -p /opt/harness-delegate/repos_upgrade/node_repo
 mkdir -p /opt/harness-delegate/repos_upgrade/java_repo
@@ -16,10 +16,10 @@ yum install readline-devel
 #microdnf install npm > /dev/null
 cd /opt/harness-delegate
 echo 'Install the Google Cloud CLI tool tarball'
-curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-457.0.0-linux-x86_64.tar.gz
 
 echo 'Unzip tarball'
-tar zxvf google-cloud-sdk-291.0.0-linux-x86_64.tar.gz && cd google-cloud-sdk
+tar zxvf google-cloud-sdk-457.0.0-linux-x86_64.tar.gz && cd google-cloud-sdk
 
 echo 'Install the CLI tool'
 cat <<EOF | ./install.sh
@@ -28,13 +28,15 @@ y
 EOF
 export PATH=$PATH:/opt/harness-delegate/google-cloud-sdk/bin
 echo 'export PATH=$PATH:/opt/harness-delegate/google-cloud-sdk/bin' > /root/.bash_profile
-#ln -s /opt/harness-delegate/google-cloud-sdk/bin/gcloud /usr/bin/gcloud
-#ln -s /opt/harness-delegate/google-cloud-sdk/bin/gsutil /usr/bin/gsutil
+ln -s /opt/harness-delegate/google-cloud-sdk/bin/gcloud /usr/bin/gcloud
+ln -s /opt/harness-delegate/google-cloud-sdk/bin/gsutil /usr/bin/gsutil
 cd ..
 gcloud components install beta --quiet
+gcloud components install app-engine-java --quiet
 
 gcloud --version
-rm google-cloud-sdk-291.0.0-linux-x86_64.tar.gz
+rm google-cloud-sdk-457.0.0-linux-x86_64.tar.gz
+
 
 #adding java
 wget https://download.java.net/openjdk/jdk8u43/ri/openjdk-8u43-linux-x64.tar.gz
@@ -51,6 +53,7 @@ update-alternatives --install /usr/bin/java java /opt/harness-delegate/repos_upg
 update-alternatives --install /usr/bin/javac javac /opt/harness-delegate/repos_upgrade/java_repo/jdk-10.0.2/bin/javac 2
 rm openjdk-10.0.2_linux-x64_bin.tar.gz
 
+
 wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
 tar xzvf openjdk-11.0.2_linux-x64_bin.tar.gz
 mv jdk-11.0.2 /opt/harness-delegate/repos_upgrade/java_repo/
@@ -64,6 +67,7 @@ mv jdk-17.0.2 /opt/harness-delegate/repos_upgrade/java_repo/
 update-alternatives --install /usr/bin/java java /opt/harness-delegate/repos_upgrade/java_repo/jdk-17.0.2/bin/java 4
 update-alternatives --install /usr/bin/javac javac /opt/harness-delegate/repos_upgrade/java_repo/jdk-17.0.2/bin/javac 4
 rm openjdk-17.0.2_linux-x64_bin.tar.gz
+
 
 #adding maven
 wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip
@@ -81,6 +85,7 @@ export NVM_DIR="$HOME/.nvm"
 
 nvm install v10.18.0
 npm install -g @angular/cli@7.3.7
+npm install -g firebase-tools@9.22.0
 nvm alias 1018 v10.18.0
 
 nvm install v10.24.1
@@ -99,6 +104,10 @@ nvm install v16.20.2
 npm install -g @angular/cli@7.3.7
 nvm alias v16 v16.20.2
 
+nvm install v17.4.0
+npm install -g @angular/cli@7.3.7
+nvm alias v17 v17.4.0
+
 nvm install v18.17.1
 npm install -g @angular/cli@7.3.7
 nvm alias v18 v18.17.1
@@ -109,12 +118,12 @@ nvm use default
 wget https://services.gradle.org/distributions/gradle-4.10.2-bin.zip
 unzip gradle-4.10.2-bin.zip
 mv gradle-4.10.2 /opt
-#echo "creating script to set gradle in path"
-#cat <<EOF > /opt/gradle-path.sh
+echo "creating script to set gradle in path"
+cat <<EOF > /opt/gradle-path.sh
 export GRADLE_HOME=/opt/gradle-4.10.2
 export PATH=/opt/gradle-4.10.2/bin:${PATH}
-#EOF
-#chmod +x /opt/gradle-path.sh
+EOF
+chmod +x /opt/gradle-path.sh
 rm gradle-4.10.2-bin.zip
 
 
