@@ -1,4 +1,5 @@
-FROM harness/delegate:23.12.81604
+ARG TAG
+FROM harness/delegate:$TAG
 COPY install_tools.sh .
 #RUN ls -ltr
 USER root
